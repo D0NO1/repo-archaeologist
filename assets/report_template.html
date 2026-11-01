@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repo Archaeology</title>
+<style>
+:root{
+  --bg:#0b0f14; --panel:#11161d; --panel2:#151c25; --border:#1f2733;
+  --text:#dbe4ee; --muted:#7d8ca0; --gold:#e3b341; --red:#f85149; --orange:#f0883e;
+  --blue:#58a6ff; --teal:#39d2c0; --purple:#bc8cff; --green:#3fb950; --gray:#8b949e;
+  --mono:ui-monospace,"Cascadia Code",Consolas,"Courier New",monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif}
+a{color:var(--blue)}
+header{position:sticky;top:0;z-index:10;background:rgba(11,15,20,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--border)}
+.hwrap{max-width:1180px;margin:0 auto;padding:14px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:14px}
+.brand{font-weight:700;font-size:16px;white-space:nowrap}
+.brand .pick{margin-right:6px}
+.subtitle{color:var(--muted);font-size:12.5px;flex:1;min-width:200px}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav button{background:none;border:1px solid transparent;color:var(--muted);padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px}
+nav button:hover{color:var(--text);border-color:var(--border)}
+nav button.on{color:#0b0f14;background:var(--gold);font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+section.tab{display:none}
+section.tab.on{display:block}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+.card h3{margin:0 0 12px;font-size:14px;letter-spacing:.4px;text-transform:uppercase;color:var(--gold)}
+.card h3 small{color:var(--muted);text-transform:none;letter-spacing:0;font-weight:400;margin-left:8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:860px){.grid2{grid-template-columns:1fr}}
+.statcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.stat{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.stat .v{font-size:22px;font-weight:700;font-family:var(--mono)}
+.stat .k{color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.hint{color:var(--muted);font-size:12px;margin:10px 0 0}
+.mono{font-family:var(--mono)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{color:var(--muted);text-align:left;font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;padding:6px 10px;border-bottom:1px solid var(--border)}
+td{padding:7px 10px;border-bottom:1px solid rgba(31,39,51,.55);vertical-align:top}
+tr:hover td{background:rgba(227,179,65,.04)}
+.bar{height:10px;border-radius:5px;background:var(--gold);min-width:2px}
+.bar.gray{background:#3a4656}
+.rowfile{font-family:var(--mono);font-size:12px;word-break:break-all}
+.badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600;color:#0b0f14}
+.q-refactor{background:var(--red)}
+.q-workhorse{background:var(--gold)}
+.q-landmine{background:var(--orange)}
+.q-backwater{background:var(--blue);color:#04121f}
+.r-high{background:var(--red)}.r-mid{background:var(--orange)}.r-low{background:#3a4656;color:#cdd9e5}
+.quadcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:18px}
+.quad{border-radius:12px;padding:14px 16px;border:1px solid var(--border);background:var(--panel)}
+.quad .qn{font-weight:700;font-size:15px}
+.quad .qc{font-size:24px;font-weight:800;font-family:var(--mono);margin:2px 0}
+.quad ul{margin:6px 0 0;padding-left:18px;color:var(--muted);font-size:12px}
+.quad ul li{font-family:var(--mono);font-size:11.5px;word-break:break-all}
+.quad.refactor .qn,.quad.refactor .qc{color:var(--red)}
+.quad.workhorse .qn,.quad.workhorse .qc{color:var(--gold)}
+.quad.landmine .qn,.quad.landmine .qc{color:var(--orange)}
+.quad.backwater .qn,.quad.backwater .qc{color:var(--blue)}
+input.search{background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:7px 12px;font-size:13px;width:280px;max-width:100%;outline:none}
+input.search:focus{border-color:var(--gold)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:2px 10px;font-size:12px;font-family:var(--mono)}
+.wallgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.wcard{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.wcard .txt{font-family:var(--mono);font-size:12.5px;margin:6px 0 8px;word-break:break-word}
+.wcard .src{color:var(--muted);font-size:11px;font-family:var(--mono);word-break:break-all}
+.b-MARKER{padding:1px 8px;border-radius:9px;font-size:10.5px;font-weight:700;letter-spacing:.5px;color:#0b0f14}
+.b-FIXME{background:var(--red)}.b-HACK{background:var(--gold)}.b-XXX{background:var(--purple)}
+.b-TODO{background:var(--blue)}.b-WARNING{background:var(--orange)}.b-WORKAROUND{background:var(--teal)}
+.b-NOTE{background:#3a4656;color:#cdd9e5}.b-DEPRECATED{background:#3a4656;color:#cdd9e5}.b-BUGBUG{background:var(--red)}
+#depgraph{width:100%;height:460px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);cursor:grab;touch-action:none}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;font-size:12px;color:var(--muted)}
+.legend span i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+#notes h1,#notes h2,#notes h3{color:var(--gold);font-size:15px;margin:14px 0 6px}
+#notes ul{margin:6px 0;padding-left:20px}
+#notes li{margin:3px 0}
+#notes code{background:var(--panel2);border:1px solid var(--border);border-radius:5px;padding:1px 5px;font-family:var(--mono);font-size:12px}
+footer{max-width:1180px;margin:0 auto;padding:20px;color:var(--muted);font-size:12px;border-top:1px solid var(--border)}
+.empty{color:var(--muted);font-style:italic;padding:8px 0}
+.donutwrap{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.dlegend{font-size:12.5px}
+.dlegend .li{margin:3px 0}
+.dlegend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:7px}
+</style>
+</head>
+<body>
+<header>
+  <div class="hwrap">
+    <div class="brand"><span class="pick">⛏️</span><span id="repo-name">Repo Archaeology</span></div>
+    <div class="subtitle" id="repo-sub"></div>
+    <nav id="tabs">
+      <button data-tab="overview" class="on">Overview</button>
+      <button data-tab="hotspots">Hotspots</button>
+      <button data-tab="risk">Risk Map</button>
+      <button data-tab="deps">Dependencies</button>
+      <button data-tab="glossary">Glossary</button>
+      <button data-tab="wall">Wall of Comments</button>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="tab on" id="tab-overview">
+    <div class="statcards" id="statcards"></div>
+    <div class="grid2">
+      <div class="card"><h3>Commit timeline <small>commits per month</small></h3><div id="timeline"></div></div>
+      <div class="card"><h3>Languages <small>by lines of code</small></h3><div id="langdonut"></div></div>
+    </div>
+    <div class="grid2">
+      <div class="card"><h3>Top contributors</h3><div id="authors"></div></div>
+      <div class="card"><h3>Ghost files <small>heavy history, deleted since</small></h3><div id="ghosts"></div></div>
+    </div>
+    <div class="card" id="notes-card" style="display:none"><h3>Archaeologist's notes</h3><div id="notes"></div></div>
+  </section>
+
+  <section class="tab" id="tab-hotspots">
+    <div class="card"><h3>Top files by commit activity</h3><div id="hotbars"></div>
+      <p class="hint">Files touched most often. High-touch files are your de-facto architecture — whatever they do, they do it for everyone.</p></div>
+    <div class="card"><h3>Churn vs commits <small>each bubble is a file</small></h3><div id="bubbles"></div>
+      <p class="hint">x = commits (log), y = lines added+removed (log), bubble size = how many files import it. Top-right = constantly rewritten and heavily reused: the blast zone.</p></div>
+  </section>
+
+  <section class="tab" id="tab-risk">
+    <div class="quadcards" id="quadcards"></div>
+    <div class="card"><h3>Risk map <small>Michael Feathers style</small></h3><div id="quadrant"></div>
+      <p class="hint">x = change frequency (log, median line), y = file size (log, median line), bubble = fan-in, color = quadrant. Touch <b style="color:var(--red)">refactor-first</b> files only with tests in place.</p></div>
+    <div class="grid2">
+      <div class="card"><h3>Most dangerous files</h3><div id="risktable"></div></div>
+      <div class="card"><h3>Zombie files <small>cold + unimported → deletion candidates</small></h3><div id="zombies"></div></div>
+    </div>
+  </section>
+
+  <section class="tab" id="tab-deps">
+    <div class="grid2">
+      <div class="card"><h3>Most depended-on (fan-in)</h3><div id="fanin"></div></div>
+      <div class="card"><h3>Heaviest importers (fan-out)</h3><div id="fanout"></div></div>
+    </div>
+    <div class="card"><h3>Internal dependency graph <small>drag nodes · top coupled files</small></h3>
+      <canvas id="depgraph"></canvas><div class="legend" id="dep-legend"></div></div>
+    <div class="grid2">
+      <div class="card"><h3>Circular dependencies</h3><div id="cycles"></div></div>
+      <div class="card"><h3>External dependencies <small>from manifests</small></h3>
+        <input class="search" id="ext-search" placeholder="filter packages…"><div id="extdeps" style="margin-top:12px"></div></div>
+    </div>
+  </section>
+
+  <section class="tab" id="tab-glossary">
+    <div class="card"><h3>Domain glossary <small>mined from code comments</small></h3>
+      <input class="search" id="gloss-search" placeholder="search terms…">
+      <div id="glossary" style="margin-top:12px"></div>
+      <p class="hint">Terms the team keeps writing about — the tribal vocabulary hiding in comments. Start here when the docs don't exist.</p></div>
+  </section>
+
+  <section class="tab" id="tab-wall">
+    <div class="card"><h3>Wall of legacy comments <small>TODO / FIXME / HACK left by predecessors</small></h3>
+      <div class="wallgrid" id="wall"></div></div>
+  </section>
+</main>
+<footer>⛏️ Generated by <b>Repo Archaeologist</b> · <span id="gen-at"></span> · raw data: <span class="mono">data.json</span></footer>
+
+<script>
+const DATA = /*__DATA__*/null;
+const AGENT_NOTES = /*__NOTES__*/null;
+
+const PALETTE = ["#e3b341","#58a6ff","#39d2c0","#f85149","#bc8cff","#3fb950","#f0883e","#d2a8ff","#76e3ea","#ff7b72"];
+const QCOLOR = {refactor:"#f85149", workhorse:"#e3b341", landmine:"#f0883e", backwater:"#58a6ff"};
+const QLABEL = {refactor:"Refactor first", workhorse:"Stable workhorses", landmine:"Landmines — don't touch", backwater:"Backwaters"};
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?"":s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = n => n>=1000000?(n/1000000).toFixed(1)+"M":n>=1000?(n/1000).toFixed(1)+"k":String(n);
+const plural = (n,w) => fmt(n)+" "+w+(n===1?"":"s");
+
+/* ---------- tabs ---------- */
+document.querySelectorAll("#tabs button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("#tabs button").forEach(x => x.classList.remove("on"));
+  document.querySelectorAll("section.tab").forEach(x => x.classList.remove("on"));
+  b.classList.add("on");
+  $("#tab-"+b.dataset.tab).classList.add("on");
+  if (b.dataset.tab === "deps") drawDepGraph();
+}));
+
+/* ---------- header ---------- */
+(function(){
+  const m = DATA.meta;
+  $("#repo-name").textContent = m.repo;
+  $("#repo-sub").textContent = `${m.branch} · ${m.first} → ${m.last} (${m.years} yrs) · ${plural(m.commits,"commit")} · ${m.contributors} contributors`;
+  $("#gen-at").textContent = "generated " + m.generated;
+})();
+
+/* ---------- overview ---------- */
+(function(){
+  const m = DATA.meta;
+  const cards = [
+    [fmt(m.commits), "commits"], [fmt(m.contributors), "contributors"],
+    [m.years+"y", "history"], [fmt(m.files), "tracked files"],
+    [fmt(m.loc), "code lines"], [String(m.languages.length), "languages"],
+    [String(DATA.deps.cycles.length), "dep cycles"],
+    [m.tested_ratio==null?"—":Math.round(m.tested_ratio*100)+"%", "files with tests"],
+  ];
+  $("#statcards").innerHTML = cards.map(c => `<div class="stat"><div class="v">${c[0]}</div><div class="k">${c[1]}</div></div>`).join("");
+
+  // timeline
+  const T = DATA.timeline;
+  if (!T.length) { $("#timeline").innerHTML = '<div class="empty">no data</div>'; }
+  else {
+    const W = 520, H = 170, pad = 24;
+    const mx = Math.max(...T.map(t => t.commits), 1);
+    const bw = Math.max(2, (W - pad*2) / T.length - 2);
+    let svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%">`;
+    T.forEach((t,i) => {
+      const h = Math.max(1, (H-pad-14) * t.commits / mx);
+      const x = pad + i*((W-pad*2)/T.length);
+      const label = (i%6===0) ? `<text x="${x}" y="${H-2}" fill="#7d8ca0" font-size="8" text-anchor="middle">${t.m.slice(2)}</text>` : "";
+      svg += `<rect x="${x}" y="${H-14-h}" width="${bw}" height="${h}" rx="1" fill="#e3b341" opacity=".85"><title>${t.m}: ${t.commits} commits, +${fmt(t.add)} / -${fmt(t.del)}</title></rect>${label}`;
+    });
+    svg += "</svg>";
+    $("#timeline").innerHTML = svg;
+  }
+
+  // donut
+  const L = DATA.meta.languages.filter(l => l.lines > 0).slice(0,8);
+  const other = DATA.meta.languages.slice(8).reduce((a,l)=>a+l.lines,0);
+  if (other > 0) L.push({name:"Other", lines:other});
+  const tot = L.reduce((a,l)=>a+l.lines,0) || 1;
+  const R=60, C=2*Math.PI*R;
+  let off = 0, segs = "";
+  L.forEach((l,i) => {
+    const frac = l.lines/tot;
+    segs += `<circle r="${R}" cx="80" cy="80" fill="none" stroke="${PALETTE[i%PALETTE.length]}" stroke-width="22" stroke-dasharray="${(frac*C).toFixed(1)} ${C.toFixed(1)}" stroke-dashoffset="${(-off*C).toFixed(1)}" transform="rotate(-90 80 80)"><title>${esc(l.name)}: ${fmt(l.lines)} lines</title></circle>`;
+    off += frac;
+  });
+  const legend = L.map((l,i) => `<div class="li"><i style="background:${PALETTE[i%PALETTE.length]}"></i>${esc(l.name)} <b>${Math.round(l.lines/tot*100)}%</b> <span style="color:#7d8ca0">· ${fmt(l.lines)} ln · ${l.files} files</span></div>`).join("");
+  $("#langdonut").innerHTML = `<div class="donutwrap"><svg viewBox="0 0 160 160" style="width:160px;height:160px">${segs}</svg><div class="dlegend">${legend}</div></div>`;
+
+  // authors
+  $("#authors").innerHTML = DATA.authors.length ? `<table><tr><th>author</th><th style="width:40%">commits</th></tr>` +
+    DATA.authors.slice(0,10).map(a => {
+      const mx = DATA.authors[0].commits;
+      return `<tr><td class="rowfile">${esc(a.name)}</td><td><div class="bar" style="width:${Math.max(3,a.commits/mx*100)}%"></div><span style="color:#7d8ca0;font-size:11px">${a.commits}</span></td></tr>`;
+    }).join("") + "</table>" : '<div class="empty">no data</div>';
+
+  // ghosts
+  $("#ghosts").innerHTML = DATA.ghosts.length ? `<table><tr><th>file</th><th>commits</th><th>last seen</th></tr>` +
+    DATA.ghosts.map(g => `<tr><td class="rowfile">${esc(g.path)}</td><td>${g.commits}</td><td style="color:#7d8ca0">${g.last||""}</td></tr>`).join("") + "</table>"
+    : '<div class="empty">Nothing deleted — suspiciously clean.</div>';
+
+  // notes
+  if (AGENT_NOTES && AGENT_NOTES.trim()) {
+    $("#notes-card").style.display = "";
+    $("#notes").innerHTML = md(AGENT_NOTES);
+  }
+})();
+
+function md(t){
+  const lines = t.split(/\r?\n/);
+  let html = "", inList = false;
+  const inline = s => esc(s)
+    .replace(/\*\*(.+?)\*\*/g,"<b>$1</b>")
+    .replace(/`([^`]+)`/g,"<code>$1</code>");
+  for (const ln of lines){
+    if (/^\s*[-*]\s+/.test(ln)){ if(!inList){html+="<ul>";inList=true;} html+="<li>"+inline(ln.replace(/^\s*[-*]\s+/,""))+"</li>"; continue; }
+    if (inList){ html+="</ul>"; inList=false; }
+    const h = ln.match(/^(#{1,3})\s+(.*)/);
+    if (h) html += `<h${h[1].length+1}>`+inline(h[2])+"</h"+(h[1].length+1)+">";
+    else if (ln.trim()) html += "<p>"+inline(ln)+"</p>";
+  }
+  if (inList) html += "</ul>";
+  return html;
+}
+
+/* ---------- shared scatter ---------- */
+function scatter(el, pts, opt){
+  const W = opt.w||560, H = opt.h||330, pad = 40;
+  if (!pts.length){ el.innerHTML = '<div class="empty">no data</div>'; return; }
+  const xs = pts.map(p=>p.x), ys = pts.map(p=>p.y);
+  const x0 = Math.log10(Math.min(...xs)+1), x1 = Math.log10(Math.max(...xs)+1);
+  const y0 = Math.log10(Math.min(...ys)+1), y1 = Math.log10(Math.max(...ys)+1);
+  const X = v => pad + (x1===x0?0.5:(Math.log10(v+1)-x0)/(x1-x0))*(W-pad-10);
+  const Y = v => H-pad - (y1===y0?0.5:(Math.log10(v+1)-y0)/(y1-y0))*(H-pad-14);
+  let s = `<svg viewBox="0 0 ${W} ${H}" style="width:100%">`;
+  if (opt.medx!=null){ const mx=X(opt.medx); s+=`<line x1="${mx}" y1="10" x2="${mx}" y2="${H-pad}" stroke="#2c3747" stroke-dasharray="4 4"/><text x="${mx+4}" y="20" fill="#7d8ca0" font-size="9">median ${opt.medx}</text>`; }
+  if (opt.medy!=null){ const my=Y(opt.medy); s+=`<line x1="${pad}" y1="${my}" x2="${W-10}" y2="${my}" stroke="#2c3747" stroke-dasharray="4 4"/><text x="${pad+4}" y="${my-4}" fill="#7d8ca0" font-size="9">median ${opt.medy}</text>`; }
+  for (const p of pts){
+    const r = 3 + 2.6*Math.sqrt(p.s||0);
+    s += `<circle cx="${X(p.x).toFixed(1)}" cy="${Y(p.y).toFixed(1)}" r="${r.toFixed(1)}" fill="${p.c}" opacity=".62" stroke="${p.c}"><title>${esc(p.t)}</title></circle>`;
+  }
+  s += `<text x="${W/2}" y="${H-6}" fill="#7d8ca0" font-size="10" text-anchor="middle">${opt.xl||""}</text>`;
+  s += `<text x="12" y="${H/2}" fill="#7d8ca0" font-size="10" transform="rotate(-90 12 ${H/2})" text-anchor="middle">${opt.yl||""}</text>`;
+  s += "</svg>";
+  el.innerHTML = s;
+}
+
+/* ---------- hotspots ---------- */
+(function(){
+  const H = DATA.hotspots;
+  const top = H.slice().sort((a,b)=>b.commits-a.commits).slice(0,15);
+  const mx = top.length ? top[0].commits : 1;
+  $("#hotbars").innerHTML = top.length ? `<table>` + top.map(h =>
+    `<tr><td class="rowfile" style="width:34%">${esc(h.path)}</td>
+     <td style="width:42%"><div class="bar" style="width:${Math.max(2,h.commits/mx*100)}%"></div></td>
+     <td style="color:#7d8ca0;white-space:nowrap">${h.commits} commits · +${fmt(h.add)}/-${fmt(h.del)}</td></tr>`).join("") + "</table>"
+    : '<div class="empty">no data</div>';
+
+  const pts = H.slice().sort((a,b)=>b.fan_in-a.fan_in).slice(0,250).map(h => ({
+    x: h.commits, y: h.churn, s: h.fan_in, c: "#e3b341",
+    t: `${h.path}\n${h.commits} commits · churn ${fmt(h.churn)} · fan-in ${h.fan_in}`
+  }));
+  scatter($("#bubbles"), pts, {xl:"commits (log)", yl:"churn (log)"});
+})();
+
+/* ---------- risk ---------- */
+(function(){
+  const R = DATA.risk, H = DATA.hotspots;
+  const desc = {
+    refactor:"Hot and big. Rewriting these without tests is how outages are born. Add tests, then carve.",
+    workhorse:"Hot but small. Fine — as long as they stay small. Watch for creep.",
+    landmine:"Big, cold, and untouched. Nobody dares to change them. Write characterization tests before you do.",
+    backwater:"Cold and small. Ignore until proven otherwise."
+  };
+  $("#quadcards").innerHTML = ["refactor","workhorse","landmine","backwater"].map(q => {
+    const d = R.quads[q] || {count:0, top:[]};
+    return `<div class="quad ${q}"><div class="qn">${QLABEL[q]}</div><div class="qc">${d.count}</div>
+      <div style="color:#7d8ca0;font-size:12px">${desc[q]}</div>
+      <ul>${d.top.slice(0,4).map(p=>`<li>${esc(p)}</li>`).join("")}</ul></div>`;
+  }).join("");
+
+  const pts = H.slice(0,250).map(h => ({
+    x: h.commits, y: h.loc, s: h.fan_in, c: QCOLOR[h.quad] || "#8b949e",
+    t: `${h.path}\nrisk ${h.risk} · ${h.commits} commits · ${h.loc} loc · fan-in ${h.fan_in}${h.tested?" · tested":""}`
+  }));
+  scatter($("#quadrant"), pts, {medx:R.med_commits, medy:R.med_loc, xl:"change frequency (log)", yl:"file size (log)"});
+
+  $("#risktable").innerHTML = `<table><tr><th>risk</th><th>file</th><th>signals</th></tr>` +
+    H.slice(0,12).map(h => {
+      const cls = h.risk>=70?"r-high":h.risk>=45?"r-mid":"r-low";
+      return `<tr><td><span class="badge ${cls}">${h.risk}</span></td>
+        <td class="rowfile">${esc(h.path)}</td>
+        <td style="color:#7d8ca0;font-size:11.5px">${h.commits} commits · ${Math.round((h.bugfixes/Math.max(1,h.commits))*100)}% bugfix · ${h.loc} loc · fan-in ${h.fan_in} · ${h.tested?"tested":"<span style='color:#f85149'>no test</span>"}</td></tr>`;
+    }).join("") + "</table>";
+
+  $("#zombies").innerHTML = R.zombies.length ? `<table><tr><th>file</th><th>loc</th><th>commits</th><th>last</th></tr>` +
+    R.zombies.map(z => `<tr><td class="rowfile">${esc(z.path)}</td><td>${z.loc}</td><td>${z.commits}</td><td style="color:#7d8ca0">${z.last||""}</td></tr>`).join("") + "</table>"
+    : '<div class="empty">No zombies found.</div>';
+})();
+
+/* ---------- dependencies ---------- */
+(function(){
+  const D = DATA.deps;
+  const bar = (rows, key) => {
+    const mx = rows.length ? Math.max(...rows.map(r=>r[key]),1) : 1;
+    return rows.length ? `<table>` + rows.map(r =>
+      `<tr><td class="rowfile" style="width:56%">${esc(r.id||r.path)}</td>
+       <td><div class="bar" style="width:${Math.max(2,r[key]/mx*100)}%"></div></td>
+       <td style="color:#7d8ca0">${r[key]}</td></tr>`).join("") + "</table>" : '<div class="empty">no data</div>';
+  };
+  const fin = D.nodes.slice().sort((a,b)=>b.fan_in-a.fan_in).slice(0,10);
+  const fout = D.nodes.slice().sort((a,b)=>b.fan_out-a.fan_out).slice(0,10);
+  $("#fanin").innerHTML = bar(fin, "fan_in");
+  $("#fanout").innerHTML = bar(fout, "fan_out");
+
+  $("#cycles").innerHTML = D.cycles.length ? D.cycles.map(c =>
+    `<div style="margin-bottom:10px"><span class="badge q-refactor">${c.length} files</span>
+     <div class="rowfile" style="margin-top:5px">${c.map(esc).join(" → ")}</div></div>`).join("")
+    : '<div class="empty">No circular dependencies detected. Rare and beautiful.</div>';
+
+  const renderExt = f => {
+    const gs = D.external.filter(g => !f || g.eco.toLowerCase().includes(f) ||
+      g.names.some(n => n.toLowerCase().includes(f)));
+    $("#extdeps").innerHTML = gs.length ? gs.map(g =>
+      `<div style="margin-bottom:12px"><b style="color:#e3b341;font-size:12.5px">${esc(g.eco)}</b> <span style="color:#7d8ca0;font-size:11px">· ${g.total}</span>
+       <div class="chips" style="margin-top:6px">${g.names.slice(0,40).map(n=>`<span class="chip">${esc(n)}</span>`).join("")}${g.total>40?`<span class="chip">+${g.total-40}…</span>`:""}</div></div>`).join("")
+      : '<div class="empty">no manifests found</div>';
+  };
+  renderExt("");
+  $("#ext-search").addEventListener("input", e => renderExt(e.target.value.trim().toLowerCase()));
+
+  // group legend
+  const gc = {}; D.nodes.forEach(n => gc[n.group] = (gc[n.group]||0)+1);
+  const gl = Object.entries(gc).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  $("#dep-legend").innerHTML = gl.map(([g],i) => `<span><i style="background:${PALETTE[i%PALETTE.length]}"></i>${esc(g)}</span>`).join("");
+})();
+
+/* ---------- force-directed dep graph ---------- */
+let depDrawn = false;
+function drawDepGraph(){
+  if (depDrawn) return; depDrawn = true;
+  const cv = $("#depgraph"), D = DATA.deps;
+  const ctx = cv.getContext("2d");
+  const N = D.nodes, L = D.links;
+  const idx = {}; N.forEach((n,i)=>idx[n.id]=i);
+  const links = L.map(l=>({a:idx[l.s], b:idx[l.t], w:l.w})).filter(l=>l.a!=null&&l.b!=null);
+  const gc = {};
+  (() => { const c={}; D.nodes.forEach(n=>c[n.group]=(c[n.group]||0)+1);
+    Object.entries(c).sort((a,b)=>b[1]-a[1]).slice(0,10).forEach(([g],i)=>gc[g]=PALETTE[i%PALETTE.length]); })();
+  function resize(){
+    cv.width = cv.clientWidth * devicePixelRatio;
+    cv.height = cv.clientHeight * devicePixelRatio;
+  }
+  resize();
+  window.addEventListener("resize", () => { resize(); layout(); draw(); });
+
+  // init positions in a circle
+  const R0 = Math.min(cv.width, cv.height) * 0.36;
+  N.forEach((n,i) => {
+    const a = 2*Math.PI*i/Math.max(1,N.length);
+    n.x = cv.width/2 + R0*Math.cos(a);
+    n.y = cv.height/2 + R0*Math.sin(a);
+    n.vx = 0; n.vy = 0;
+  });
+  const radius = n => 4 + 3.2*Math.sqrt(n.fan_in);
+
+  function step(){
+    const k = 90 / Math.sqrt(Math.max(1,N.length));
+    for (let i=0;i<N.length;i++) for (let j=i+1;j<N.length;j++){
+      const a=N[i], b=N[j];
+      let dx=a.x-b.x, dy=a.y-b.y;
+      let d2 = dx*dx+dy*dy || 1;
+      const f = (k*k)/d2;
+      const d = Math.sqrt(d2);
+      dx/=d; dy/=d;
+      a.vx += dx*f; a.vy += dy*f;
+      b.vx -= dx*f; b.vy -= dy*f;
+    }
+    for (const l of links){
+      const a=N[l.a], b=N[l.b];
+      let dx=a.x-b.x, dy=a.y-b.y;
+      const d = Math.sqrt(dx*dx+dy*dy)||1;
+      const target = 90 + 12*Math.min(10,l.w);
+      const f = (d-target)/d*0.02;
+      a.vx -= dx*f; a.vy -= dy*f;
+      b.vx += dx*f; b.vy += dy*f;
+    }
+    for (const n of N){
+      n.vx += (cv.width/2 - n.x)*0.0015;
+      n.vy += (cv.height/2 - n.y)*0.0015;
+      n.x += Math.max(-14, Math.min(14, n.vx));
+      n.y += Math.max(-14, Math.min(14, n.vy));
+      n.vx *= 0.86; n.vy *= 0.86;
+    }
+  }
+  function layout(){ for (let i=0;i<260;i++) step(); }
+
+  let hover = -1;
+  function draw(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ctx.strokeStyle = "rgba(125,140,160,.28)";
+    ctx.lineWidth = Math.max(1, devicePixelRatio*0.7);
+    for (const l of links){
+      const a=N[l.a], b=N[l.b];
+      ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+    }
+    const labelTop = new Set(D.nodes.slice().sort((a,b)=>b.fan_in-a.fan_in).slice(0,10).map(n=>n.id));
+    ctx.textAlign = "center";
+    for (const n of N){
+      const color = gc[n.group] || "#8b949e";
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, radius(n)*devicePixelRatio*0.5, 0, 2*Math.PI);
+      ctx.fillStyle = color; ctx.globalAlpha = .9;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      if (labelTop.has(n.id)){
+        ctx.fillStyle = "#dbe4ee";
+        ctx.font = `${10*devicePixelRatio}px ui-monospace,monospace`;
+        const nm = n.id.split("/").pop();
+        ctx.fillText(nm, n.x, n.y - (radius(n)*devicePixelRatio*0.5 + 5));
+      }
+    }
+    if (hover >= 0){
+      const n = N[hover];
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, (radius(n)+5)*devicePixelRatio*0.5, 0, 2*Math.PI);
+      ctx.strokeStyle = "#e3b341"; ctx.lineWidth = 2; ctx.stroke();
+      const txt = `${n.id} — fan-in ${n.fan_in}, fan-out ${n.fan_out}`;
+      ctx.font = `${11*devicePixelRatio}px ui-monospace,monospace`;
+      const w = ctx.measureText(txt).width + 14*devicePixelRatio;
+      let tx = n.x - w/2, ty = n.y - 26*devicePixelRatio;
+      if (tx < 4) tx = 4;
+      if (tx + w > cv.width - 4) tx = cv.width - 4 - w;
+      ctx.fillStyle = "rgba(11,15,20,.92)";
+      ctx.strokeStyle = "#1f2733";
+      ctx.beginPath(); ctx.rect(tx, ty - 13*devicePixelRatio, w, 19*devicePixelRatio); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = "#dbe4ee"; ctx.textAlign = "left";
+      ctx.fillText(txt, tx + 7*devicePixelRatio, ty);
+    }
+  }
+
+  let dragging = -1, anim = 0;
+  function pos(e){
+    const r = cv.getBoundingClientRect();
+    const cx = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+    const cy = (e.touches ? e.touches[0].clientY : e.clientY) - r.top;
+    return [cx*devicePixelRatio, cy*devicePixelRatio];
+  }
+  function nearest(x,y){
+    let best = -1, bd = 18*devicePixelRatio;
+    N.forEach((n,i) => {
+      const d = Math.hypot(n.x-x, n.y-y);
+      if (d < bd + radius(n)) { bd = d; best = i; }
+    });
+    return best;
+  }
+  let down = false;
+  function onDown(e){
+    const [x,y] = pos(e);
+    dragging = nearest(x,y); down = true;
+    if (dragging >= 0){ e.preventDefault(); tick(60); }
+  }
+  function onMove(e){
+    const [x,y] = pos(e);
+    if (down && dragging >= 0){ N[dragging].x = x; N[dragging].y = y; tick(30); }
+    else {
+      const h = nearest(x,y);
+      if (h !== hover){ hover = h; draw(); }
+    }
+  }
+  function onUp(){ down = false; dragging = -1; }
+  function tick(n){ cancelAnimationFrame(anim); for(let i=0;i<n;i++) step(); draw(); }
+
+  cv.addEventListener("mousedown", onDown);
+  cv.addEventListener("mousemove", onMove);
+  window.addEventListener("mouseup", onUp);
+  cv.addEventListener("touchstart", onDown, {passive:false});
+  cv.addEventListener("touchmove", onMove, {passive:false});
+  cv.addEventListener("touchend", onUp);
+
+  layout(); draw();
+}
+
+/* ---------- glossary ---------- */
+(function(){
+  const G = DATA.glossary;
+  const render = f => {
+    const rows = G.filter(g => !f || g.term.toLowerCase().includes(f) || g.sample.toLowerCase().includes(f));
+    $("#glossary").innerHTML = rows.length ? `<table><tr><th>term</th><th>in code</th><th>mentions</th><th>files</th><th>example from the trenches</th></tr>` +
+      rows.map(g => `<tr><td class="rowfile" style="color:#e3b341">${esc(g.term)}</td><td>${g.in_code?"✓":""}</td><td>${g.count}</td><td>${g.files}</td><td style="color:#7d8ca0;font-size:12px">${esc(g.sample)}</td></tr>`).join("") + "</table>"
+      : (G.length ? '<div class="empty">no match</div>' : '<div class="empty">Not enough comments to mine a glossary — ironic, given this is a legacy repo.</div>');
+  };
+  render("");
+  $("#gloss-search").addEventListener("input", e => render(e.target.value.trim().toLowerCase()));
+})();
+
+/* ---------- wall ---------- */
+(function(){
+  const W = DATA.wall;
+  $("#wall").innerHTML = W.length ? W.map(w =>
+    `<div class="wcard"><span class="b-MARKER b-${esc(w.marker)}">${esc(w.marker)}</span>
+     <div class="txt">${esc(w.text)}</div>
+     <div class="src">${esc(w.path)}${w.line?":"+w.line:""}</div></div>`).join("")
+    : '<div class="empty">No TODO/FIXME/HACK comments found. Either the repo is clean… or the bodies were buried elsewhere.</div>';
+})();
+</script>
+</body>
+</html>

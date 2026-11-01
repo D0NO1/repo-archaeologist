@@ -1,0 +1,938 @@
+{
+ "meta": {
+  "repo": "arch-demo-repo",
+  "branch": "master",
+  "generated": "2026-11-01 05:40 UTC",
+  "first": "2023-01-10",
+  "last": "2025-03-12",
+  "years": 2.2,
+  "commits": 36,
+  "contributors": 5,
+  "files": 16,
+  "loc": 234,
+  "languages": [
+   {
+    "name": "Python",
+    "files": 11,
+    "lines": 213
+   },
+   {
+    "name": "JavaScript",
+    "files": 3,
+    "lines": 21
+   },
+   {
+    "name": "Markdown",
+    "files": 1,
+    "lines": 6
+   },
+   {
+    "name": "Text",
+    "files": 1,
+    "lines": 6
+   }
+  ],
+  "tested_ratio": 0.25,
+  "cycle_count": 1,
+  "internal_edges": 13
+ },
+ "timeline": [
+  {
+   "m": "2023-01",
+   "commits": 1,
+   "add": 161,
+   "del": 0
+  },
+  {
+   "m": "2023-02",
+   "commits": 1,
+   "add": 0,
+   "del": 0
+  },
+  {
+   "m": "2023-03",
+   "commits": 1,
+   "add": 0,
+   "del": 0
+  },
+  {
+   "m": "2023-04",
+   "commits": 1,
+   "add": 0,
+   "del": 0
+  },
+  {
+   "m": "2023-05",
+   "commits": 1,
+   "add": 0,
+   "del": 0
+  },
+  {
+   "m": "2023-06",
+   "commits": 1,
+   "add": 0,
+   "del": 0
+  },
+  {
+   "m": "2023-07",
+   "commits": 1,
+   "add": 0,
+   "del": 0
+  },
+  {
+   "m": "2023-08",
+   "commits": 1,
+   "add": 4,
+   "del": 0
+  },
+  {
+   "m": "2023-09",
+   "commits": 1,
+   "add": 0,
+   "del": 0
+  },
+  {
+   "m": "2023-10",
+   "commits": 1,
+   "add": 0,
+   "del": 0
+  },
+  {
+   "m": "2023-11",
+   "commits": 1,
+   "add": 0,
+   "del": 0
+  },
+  {
+   "m": "2023-12",
+   "commits": 1,
+   "add": 0,
+   "del": 0
+  },
+  {
+   "m": "2024-01",
+   "commits": 1,
+   "add": 7,
+   "del": 0
+  },
+  {
+   "m": "2024-02",
+   "commits": 2,
+   "add": 7,
+   "del": 0
+  },
+  {
+   "m": "2024-03",
+   "commits": 3,
+   "add": 8,
+   "del": 0
+  },
+  {
+   "m": "2024-04",
+   "commits": 1,
+   "add": 8,
+   "del": 0
+  },
+  {
+   "m": "2024-05",
+   "commits": 3,
+   "add": 4,
+   "del": 0
+  },
+  {
+   "m": "2024-06",
+   "commits": 1,
+   "add": 4,
+   "del": 0
+  },
+  {
+   "m": "2024-07",
+   "commits": 1,
+   "add": 4,
+   "del": 0
+  },
+  {
+   "m": "2024-08",
+   "commits": 2,
+   "add": 2,
+   "del": 0
+  },
+  {
+   "m": "2024-09",
+   "commits": 1,
+   "add": 4,
+   "del": 0
+  },
+  {
+   "m": "2024-10",
+   "commits": 2,
+   "add": 4,
+   "del": 0
+  },
+  {
+   "m": "2024-11",
+   "commits": 1,
+   "add": 2,
+   "del": 0
+  },
+  {
+   "m": "2024-12",
+   "commits": 1,
+   "add": 2,
+   "del": 0
+  },
+  {
+   "m": "2025-01",
+   "commits": 2,
+   "add": 6,
+   "del": 0
+  },
+  {
+   "m": "2025-02",
+   "commits": 1,
+   "add": 2,
+   "del": 0
+  },
+  {
+   "m": "2025-03",
+   "commits": 2,
+   "add": 2,
+   "del": 0
+  }
+ ],
+ "authors": [
+  {
+   "name": "Alice",
+   "commits": 20
+  },
+  {
+   "name": "Bob",
+   "commits": 6
+  },
+  {
+   "name": "Charlie",
+   "commits": 4
+  },
+  {
+   "name": "Eve",
+   "commits": 3
+  },
+  {
+   "name": "Dave",
+   "commits": 3
+  }
+ ],
+ "hotspots": [
+  {
+   "path": "src/payment_service.py",
+   "lang": "Python",
+   "loc": 65,
+   "commits": 8,
+   "add": 64,
+   "del": 0,
+   "churn": 64,
+   "bugfixes": 6,
+   "authors_n": 2,
+   "fan_in": 2,
+   "fan_out": 4,
+   "tested": false,
+   "last": "2025-03-02",
+   "first": "2023-01-10",
+   "risk": 88,
+   "quad": "refactor"
+  },
+  {
+   "path": "src/fx_rates.py",
+   "lang": "Python",
+   "loc": 24,
+   "commits": 3,
+   "add": 23,
+   "del": 0,
+   "churn": 23,
+   "bugfixes": 2,
+   "authors_n": 1,
+   "fan_in": 2,
+   "fan_out": 0,
+   "tested": false,
+   "last": "2025-01-20",
+   "first": "2023-01-10",
+   "risk": 71,
+   "quad": "refactor"
+  },
+  {
+   "path": "src/ledger.py",
+   "lang": "Python",
+   "loc": 31,
+   "commits": 4,
+   "add": 30,
+   "del": 0,
+   "churn": 30,
+   "bugfixes": 2,
+   "authors_n": 2,
+   "fan_in": 4,
+   "fan_out": 0,
+   "tested": true,
+   "last": "2025-02-14",
+   "first": "2023-01-10",
+   "risk": 68,
+   "quad": "refactor"
+  },
+  {
+   "path": "src/recon.py",
+   "lang": "Python",
+   "loc": 16,
+   "commits": 3,
+   "add": 15,
+   "del": 0,
+   "churn": 15,
+   "bugfixes": 1,
+   "authors_n": 2,
+   "fan_in": 2,
+   "fan_out": 1,
+   "tested": false,
+   "last": "2024-10-20",
+   "first": "2023-01-10",
+   "risk": 62,
+   "quad": "refactor"
+  },
+  {
+   "path": "src/settlement_engine.py",
+   "lang": "Python",
+   "loc": 34,
+   "commits": 4,
+   "add": 33,
+   "del": 0,
+   "churn": 33,
+   "bugfixes": 2,
+   "authors_n": 2,
+   "fan_in": 0,
+   "fan_out": 3,
+   "tested": false,
+   "last": "2024-12-03",
+   "first": "2023-01-10",
+   "risk": 57,
+   "quad": "refactor"
+  },
+  {
+   "path": "src/notify.py",
+   "lang": "Python",
+   "loc": 11,
+   "commits": 2,
+   "add": 10,
+   "del": 0,
+   "churn": 10,
+   "bugfixes": 0,
+   "authors_n": 2,
+   "fan_in": 1,
+   "fan_out": 1,
+   "tested": false,
+   "last": "2024-06-14",
+   "first": "2023-01-10",
+   "risk": 44,
+   "quad": "refactor"
+  },
+  {
+   "path": "web/api.js",
+   "lang": "JavaScript",
+   "loc": 11,
+   "commits": 2,
+   "add": 10,
+   "del": 0,
+   "churn": 10,
+   "bugfixes": 0,
+   "authors_n": 2,
+   "fan_in": 1,
+   "fan_out": 1,
+   "tested": false,
+   "last": "2024-11-11",
+   "first": "2023-01-10",
+   "risk": 44,
+   "quad": "refactor"
+  },
+  {
+   "path": "src/report.py",
+   "lang": "Python",
+   "loc": 6,
+   "commits": 1,
+   "add": 5,
+   "del": 0,
+   "churn": 5,
+   "bugfixes": 0,
+   "authors_n": 1,
+   "fan_in": 1,
+   "fan_out": 1,
+   "tested": false,
+   "last": "2023-01-10",
+   "first": "2023-01-10",
+   "risk": 37,
+   "quad": "backwater"
+  },
+  {
+   "path": "web/util.js",
+   "lang": "JavaScript",
+   "loc": 4,
+   "commits": 1,
+   "add": 3,
+   "del": 0,
+   "churn": 3,
+   "bugfixes": 0,
+   "authors_n": 1,
+   "fan_in": 1,
+   "fan_out": 0,
+   "tested": false,
+   "last": "2023-01-10",
+   "first": "2023-01-10",
+   "risk": 35,
+   "quad": "backwater"
+  },
+  {
+   "path": "web/app.js",
+   "lang": "JavaScript",
+   "loc": 6,
+   "commits": 2,
+   "add": 5,
+   "del": 0,
+   "churn": 5,
+   "bugfixes": 0,
+   "authors_n": 2,
+   "fan_in": 0,
+   "fan_out": 1,
+   "tested": false,
+   "last": "2024-05-01",
+   "first": "2023-01-10",
+   "risk": 32,
+   "quad": "workhorse"
+  },
+  {
+   "path": "src/cli.py",
+   "lang": "Python",
+   "loc": 10,
+   "commits": 1,
+   "add": 9,
+   "del": 0,
+   "churn": 9,
+   "bugfixes": 0,
+   "authors_n": 1,
+   "fan_in": 0,
+   "fan_out": 1,
+   "tested": false,
+   "last": "2023-01-10",
+   "first": "2023-01-10",
+   "risk": 29,
+   "quad": "backwater"
+  },
+  {
+   "path": "src/legacy_batch_job.py",
+   "lang": "Python",
+   "loc": 9,
+   "commits": 1,
+   "add": 8,
+   "del": 0,
+   "churn": 8,
+   "bugfixes": 0,
+   "authors_n": 1,
+   "fan_in": 0,
+   "fan_out": 0,
+   "tested": false,
+   "last": "2023-01-10",
+   "first": "2023-01-10",
+   "risk": 29,
+   "quad": "backwater"
+  },
+  {
+   "path": "tests/test_ledger.py",
+   "lang": "Python",
+   "loc": 7,
+   "commits": 1,
+   "add": 6,
+   "del": 0,
+   "churn": 6,
+   "bugfixes": 0,
+   "authors_n": 1,
+   "fan_in": 0,
+   "fan_out": 1,
+   "tested": false,
+   "last": "2023-01-10",
+   "first": "2023-01-10",
+   "risk": 28,
+   "quad": "backwater"
+  },
+  {
+   "path": "src/__init__.py",
+   "lang": "Python",
+   "loc": 0,
+   "commits": 1,
+   "add": 0,
+   "del": 0,
+   "churn": 0,
+   "bugfixes": 0,
+   "authors_n": 1,
+   "fan_in": 0,
+   "fan_out": 0,
+   "tested": false,
+   "last": "2023-01-10",
+   "first": "2023-01-10",
+   "risk": 19,
+   "quad": "backwater"
+  }
+ ],
+ "ghosts": [],
+ "risk": {
+  "med_commits": 2.0,
+  "med_loc": 10.5,
+  "quads": {
+   "refactor": {
+    "count": 7,
+    "top": [
+     "src/fx_rates.py",
+     "src/ledger.py",
+     "src/notify.py",
+     "src/payment_service.py",
+     "src/recon.py",
+     "src/settlement_engine.py"
+    ]
+   },
+   "backwater": {
+    "count": 6,
+    "top": [
+     "src/__init__.py",
+     "src/cli.py",
+     "src/legacy_batch_job.py",
+     "src/report.py",
+     "tests/test_ledger.py",
+     "web/util.js"
+    ]
+   },
+   "workhorse": {
+    "count": 1,
+    "top": [
+     "web/app.js"
+    ]
+   }
+  },
+  "zombies": [],
+  "orphans": []
+ },
+ "deps": {
+  "nodes": [
+   {
+    "id": "src/ledger.py",
+    "group": "src",
+    "loc": 31,
+    "fan_in": 4,
+    "fan_out": 0
+   },
+   {
+    "id": "src/payment_service.py",
+    "group": "src",
+    "loc": 65,
+    "fan_in": 2,
+    "fan_out": 4
+   },
+   {
+    "id": "src/recon.py",
+    "group": "src",
+    "loc": 16,
+    "fan_in": 2,
+    "fan_out": 1
+   },
+   {
+    "id": "src/fx_rates.py",
+    "group": "src",
+    "loc": 24,
+    "fan_in": 2,
+    "fan_out": 0
+   },
+   {
+    "id": "web/api.js",
+    "group": "web",
+    "loc": 11,
+    "fan_in": 1,
+    "fan_out": 1
+   },
+   {
+    "id": "src/notify.py",
+    "group": "src",
+    "loc": 11,
+    "fan_in": 1,
+    "fan_out": 1
+   },
+   {
+    "id": "src/report.py",
+    "group": "src",
+    "loc": 6,
+    "fan_in": 1,
+    "fan_out": 1
+   },
+   {
+    "id": "web/util.js",
+    "group": "web",
+    "loc": 4,
+    "fan_in": 1,
+    "fan_out": 0
+   },
+   {
+    "id": "src/settlement_engine.py",
+    "group": "src",
+    "loc": 34,
+    "fan_in": 0,
+    "fan_out": 3
+   },
+   {
+    "id": "src/cli.py",
+    "group": "src",
+    "loc": 10,
+    "fan_in": 0,
+    "fan_out": 1
+   },
+   {
+    "id": "tests/test_ledger.py",
+    "group": "tests",
+    "loc": 7,
+    "fan_in": 0,
+    "fan_out": 1
+   },
+   {
+    "id": "web/app.js",
+    "group": "web",
+    "loc": 6,
+    "fan_in": 0,
+    "fan_out": 1
+   }
+  ],
+  "links": [
+   {
+    "s": "src/cli.py",
+    "t": "src/payment_service.py",
+    "w": 1
+   },
+   {
+    "s": "src/notify.py",
+    "t": "src/ledger.py",
+    "w": 1
+   },
+   {
+    "s": "src/payment_service.py",
+    "t": "src/ledger.py",
+    "w": 1
+   },
+   {
+    "s": "src/payment_service.py",
+    "t": "src/fx_rates.py",
+    "w": 2
+   },
+   {
+    "s": "src/payment_service.py",
+    "t": "src/notify.py",
+    "w": 1
+   },
+   {
+    "s": "src/recon.py",
+    "t": "src/report.py",
+    "w": 1
+   },
+   {
+    "s": "src/report.py",
+    "t": "src/recon.py",
+    "w": 1
+   },
+   {
+    "s": "src/settlement_engine.py",
+    "t": "src/ledger.py",
+    "w": 1
+   },
+   {
+    "s": "src/settlement_engine.py",
+    "t": "src/recon.py",
+    "w": 1
+   },
+   {
+    "s": "src/settlement_engine.py",
+    "t": "src/payment_service.py",
+    "w": 1
+   },
+   {
+    "s": "tests/test_ledger.py",
+    "t": "src/ledger.py",
+    "w": 1
+   },
+   {
+    "s": "web/api.js",
+    "t": "web/util.js",
+    "w": 1
+   },
+   {
+    "s": "web/app.js",
+    "t": "web/api.js",
+    "w": 1
+   }
+  ],
+  "cycles": [
+   [
+    "src/recon.py",
+    "src/report.py"
+   ]
+  ],
+  "external": [
+   {
+    "eco": "pip",
+    "total": 5,
+    "names": [
+     "SQLAlchemy",
+     "celery",
+     "flask",
+     "pandas",
+     "requests"
+    ]
+   }
+  ]
+ },
+ "glossary": [
+  {
+   "term": "SettlementEngine",
+   "count": 8,
+   "files": 4,
+   "sample": "Balance check happens in SettlementEngine, not here (see HACK there)",
+   "in_code": true
+  },
+  {
+   "term": "RailContract",
+   "count": 6,
+   "files": 3,
+   "sample": "XXX: this dict is the RailContract v1. Field names are load-bearing.",
+   "in_code": true
+  },
+  {
+   "term": "Settlement",
+   "count": 5,
+   "files": 3,
+   "sample": "WARNING: do not apply this to Settlement Batch totals, treasury rule T-114",
+   "in_code": true
+  },
+  {
+   "term": "Ledger",
+   "count": 5,
+   "files": 3,
+   "sample": "The Ledger. If you break this, finance cries. DO NOT change balance semantics.",
+   "in_code": true
+  },
+  {
+   "term": "Batch",
+   "count": 4,
+   "files": 2,
+   "sample": "WARNING: do not apply this to Settlement Batch totals, treasury rule T-114",
+   "in_code": true
+  },
+  {
+   "term": "RailGateway",
+   "count": 4,
+   "files": 2,
+   "sample": "HACK: retry loop because RailGateway drops connections randomly.",
+   "in_code": true
+  },
+  {
+   "term": "Rates",
+   "count": 3,
+   "files": 1,
+   "sample": "TODO: cache TTL, this hits the Rates API every single call",
+   "in_code": true
+  },
+  {
+   "term": "Payment",
+   "count": 3,
+   "files": 1,
+   "sample": "Process payments across Payment Rail endpoints.",
+   "in_code": true
+  },
+  {
+   "term": "Rail",
+   "count": 3,
+   "files": 2,
+   "sample": "Process payments across Payment Rail endpoints.",
+   "in_code": true
+  }
+ ],
+ "wall": [
+  {
+   "marker": "TODO",
+   "text": "cache TTL, this hits the Rates API every single call",
+   "path": "src/fx_rates.py",
+   "line": 7
+  },
+  {
+   "marker": "WARNING",
+   "text": "assumes rate() returns mid-market rate; treasury wants FIXING rate at 4pm",
+   "path": "src/fx_rates.py",
+   "line": 12
+  },
+  {
+   "marker": "WARNING",
+   "text": "do not apply this to Settlement Batch totals, treasury rule T-114",
+   "path": "src/fx_rates.py",
+   "line": 18
+  },
+  {
+   "marker": "TODO",
+   "text": "actually implement the cache. Every call pays 200ms to the Rates service.",
+   "path": "src/fx_rates.py",
+   "line": 23
+  },
+  {
+   "marker": "WARNING",
+   "text": "DO NOT change balance semantics.",
+   "path": "src/ledger.py",
+   "line": 2
+  },
+  {
+   "marker": "FIXME",
+   "text": "does not consider pending entries",
+   "path": "src/ledger.py",
+   "line": 23
+  },
+  {
+   "marker": "NOTE",
+   "text": "replay must be idempotent, gateways retry everything",
+   "path": "src/ledger.py",
+   "line": 27
+  },
+  {
+   "marker": "WARNING",
+   "text": "Do not delete until db-old-01 is decommissioned.",
+   "path": "src/legacy_batch_job.py",
+   "line": 4
+  },
+  {
+   "marker": "WARNING",
+   "text": "Good luck.",
+   "path": "src/legacy_batch_job.py",
+   "line": 5
+  },
+  {
+   "marker": "FIXME",
+   "text": "hardcoded SMTP relay from the office network. Works on VPN only.",
+   "path": "src/notify.py",
+   "line": 5
+  },
+  {
+   "marker": "FIXME",
+   "text": "inline css because the mail client strips <style>. It is 2014 in here.",
+   "path": "src/notify.py",
+   "line": 9
+  },
+  {
+   "marker": "HACK",
+   "text": "retry loop because RailGateway drops connections randomly.",
+   "path": "src/payment_service.py",
+   "line": 12
+  },
+  {
+   "marker": "WARNING",
+   "text": "DO NOT remove the sleep, see incident INC-2381 (2022-11-03)",
+   "path": "src/payment_service.py",
+   "line": 13
+  },
+  {
+   "marker": "FIXME",
+   "text": "float math on money. It works. Until it doesn't. (see Settlement Engine drift)",
+   "path": "src/payment_service.py",
+   "line": 20
+  },
+  {
+   "marker": "XXX",
+   "text": "this dict is the RailContract v1. Field names are load-bearing.",
+   "path": "src/payment_service.py",
+   "line": 30
+  },
+  {
+   "marker": "TODO",
+   "text": "refunds should reverse the original Ledger entries, right now we double-book",
+   "path": "src/payment_service.py",
+   "line": 35
+  },
+  {
+   "marker": "XXX",
+   "text": "void is not refund. The rail treats them differently. Do not merge them.",
+   "path": "src/payment_service.py",
+   "line": 40
+  },
+  {
+   "marker": "TODO",
+   "text": "wire to the real rail status page, this is a stub",
+   "path": "src/payment_service.py",
+   "line": 51
+  },
+  {
+   "marker": "XXX",
+   "text": "rail sends 'VOIDED' and 'voided' depending on the endpoint. Great.",
+   "path": "src/payment_service.py",
+   "line": 55
+  },
+  {
+   "marker": "WORKAROUND",
+   "text": "rail dedup window is 90s, ours is 5m. Mismatch is intentional, see INC-3107",
+   "path": "src/payment_service.py",
+   "line": 61
+  },
+  {
+   "marker": "NOTE",
+   "text": "batch totals come from SettlementEngine, never compute them here. Twice. We did it twice.",
+   "path": "src/payment_service.py",
+   "line": 64
+  },
+  {
+   "marker": "TODO",
+   "text": "the rail report lags 20 minutes, so this \"reconciles\" against yesterday. Known gap.",
+   "path": "src/recon.py",
+   "line": 5
+  },
+  {
+   "marker": "TODO",
+   "text": "quote escaping, eventually",
+   "path": "src/recon.py",
+   "line": 10
+  },
+  {
+   "marker": "TODO",
+   "text": "this tolerates 2 cents of drift, finance said 1. Politics.",
+   "path": "src/recon.py",
+   "line": 14
+  },
+  {
+   "marker": "HACK",
+   "text": "the drift fix. Rounding goes banker's rounding HERE ONLY.",
+   "path": "src/settlement_engine.py",
+   "line": 16
+  },
+  {
+   "marker": "WORKAROUND",
+   "text": "python round() is banker's rounding which is what we want, do not use Decimal here",
+   "path": "src/settlement_engine.py",
+   "line": 25
+  },
+  {
+   "marker": "HACK",
+   "text": "the drift came back. Round per entry AND on the total. Do not refactor into one place.",
+   "path": "src/settlement_engine.py",
+   "line": 31
+  },
+  {
+   "marker": "FIXME",
+   "text": "empty batch used to raise. The 2am cron sends empty batches at midnight UTC. Every night.",
+   "path": "src/settlement_engine.py",
+   "line": 33
+  },
+  {
+   "marker": "TODO",
+   "text": "the dashboard still polls; move to websockets when the RailGateway supports it",
+   "path": "web/api.js",
+   "line": 7
+  },
+  {
+   "marker": "HACK",
+   "text": "amount is a string here because the RailContract v1 sends strings. Do not \"fix\" to Number.",
+   "path": "web/app.js",
+   "line": 2
+  }
+ ],
+ "notes": "# Excavation summary — LegacyPay\n\n- **Bus factor risk**: Alice wrote/holds 11 of 19 commits; Dave (the settlement domain expert) left in 2024.\n- **The blast zone**: `src/payment_service.py` — every payment crosses it, it carries a 75% bugfix ratio, and it has no test. Characterize-test `process()` and `_rail_call()` before touching anything.\n- **The power grid**: `src/ledger.py` has the highest fan-in (4 importers) and is the only tested module. It is the ground truth for balances.\n- **The minefield**: `src/recon.py` ⇄ `src/report.py` form a circular import (the NOTE comment admits two engineers already lost to it). `src/legacy_batch_job.py` is dead code still wired to cron on decommissioned infra.\n- **Tribal language**: Settlement Batch, RailContract v1, the Ledger, \"the drift\" (cent-level rounding), Dave's Incidents.\n- **Reading order for week one**: `ledger.py` → `payment_service.py` → `settlement_engine.py` → `recon.py`/`report.py` → `web/api.js`.\n- **30/60/90**: (30) tests around PaymentService + kill the SMTP hardcode; (60) delete the legacy batch job, break the recon/report cycle; (90) move money math off floats (`fx_rates.convert`).\n"
+}
